@@ -74,7 +74,7 @@ var barcode = document.querySelector('#barcode'),
 		var code = barcode.value
 		routing.innerHTML = code.slice(0, 3)
 		zip.innerHTML = code.slice(3, 8)
-		tracking.innerHTML = code.slice(8, -1)
+		tracking.innerHTML = code.slice(8)
 	})
 	routing.addEventListener('click', clickCopy)
 	zip.addEventListener('click', clickCopy)
