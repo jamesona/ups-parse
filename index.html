@@ -1,0 +1,83 @@
+<html>
+<head>
+	<style>
+		html, body {
+			background-color: #999;
+			padding: 5vh;
+			font-family: 'helvetica neue', helvetica, arial, sans-serif;
+		}
+		.scan, .parse {
+			background-color: #ccc;
+			border-radius: 20px;
+			margin: 30px auto;
+			max-width: 700px;
+			padding: 3%;
+			text-align: center;
+			width: 70%;
+		}
+		.parse div {
+			display: inline-block;
+			max-width: 32.5%;
+		}
+		div h3 {
+			font-size: 22px;
+			margin: 15px 0 0;
+			text-align: center;
+			width: 100%;
+		}
+		textarea, input {
+			background-color: #eee;
+			border-radius: 5px;
+			border: solid 1px #888;
+			max-height: 30px;
+			max-width: 100%;
+			min-height: 30px;
+			min-width: 100%;
+			padding: 6px;
+			resize: none;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div class="scan">
+		<h3>Scan code here</h3>
+		<input id="barcode"/>
+	</div>
+	<div class="parse">
+		<h3>Click a box to copy:</h3>
+		<div>
+			<h3>Routing #</h3>
+			<textarea id="routing"></textarea>
+		</div>
+		<div>
+			<h3>Zip Code</h3>
+			<textarea id="zip"></textarea>
+		</div>
+		<div>
+			<h3>Tracking #</h3>
+			<textarea id="tracking"></textarea>
+		</div>
+	</div>
+</body>
+<script>
+function clickCopy(evt) {
+	var ele = evt.currentTarget
+	ele.select()
+	document.execCommand('copy')
+}
+var barcode = document.querySelector('#barcode'),
+	routing = document.querySelector('#routing'),
+	zip = document.querySelector('#zip'),
+	tracking = document.querySelector('#tracking')
+	barcode.addEventListener('change', function(evt){
+		var code = barcode.value
+		routing.innerHTML = code.slice(0, 3)
+		zip.innerHTML = code.slice(3, 8)
+		tracking.innerHTML = code.slice(8, -1)
+	})
+	routing.addEventListener('click', clickCopy)
+	zip.addEventListener('click', clickCopy)
+	tracking.addEventListener('click', clickCopy)
+</script>
+</html>
